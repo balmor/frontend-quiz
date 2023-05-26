@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { IQuiz } from '@/types';
+import { FC, useState } from 'react';
 import CurrentQuiz from '../CurrentQuiz';
 
-const QuizSection = ({ quiz, quiz: { topic = '' } = {} }: any) => {
+const QuizSection: FC<IQuiz> = ({ quiz, quiz: { topic = '' } }) => {
   const [isProgress, setProgress] = useState(false);
 
   const handleStart = () => {

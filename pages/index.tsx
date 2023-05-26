@@ -4,8 +4,9 @@ import Header from '@/components/Header';
 import Content from '@/components/Content';
 import { getAllFrontedQuiz } from '@/lib/api';
 import FrontendQuiz from '@/components/FrontendQuiz';
+import { PropsHome } from '@/types';
 
-export default function Home({ frontendQuiz: { items = [] } = {} }: any) {
+export default function Home({ items = [] }: PropsHome) {
   return (
     <>
       <Head>
@@ -24,11 +25,10 @@ export default function Home({ frontendQuiz: { items = [] } = {} }: any) {
 }
 
 export async function getStaticProps() {
-  const frontendQuiz = await getAllFrontedQuiz();
-
-  console.log('index frontendQuiz', frontendQuiz);
+  const results = await getAllFrontedQuiz();
+  const items = results.items;
 
   return {
-    props: { frontendQuiz },
+    props: { items },
   };
 }

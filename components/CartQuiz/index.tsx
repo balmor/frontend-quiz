@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import clsx from 'clsx';
@@ -5,26 +6,24 @@ import { useEffect, useState } from 'react';
 import { localStorageHelper } from '@/utils';
 import { isEmpty } from 'lodash';
 import LastResult from '../LastResult';
+import { ITimeResult, PropsCartQuiz } from '@/types';
 
-const CartQuiz = ({
-  item,
-  item: {
+const CartQuiz: FC<PropsCartQuiz> = ({
+  quiz: {
     fields: {
       topic = '',
       slug = '',
       new: newQuiz = false,
-      image: { fields: { file: { url: imageUrl = '' } = {} } = {} } = {},
-    } = {},
+      image: { fields: { file: { url: imageUrl = '' } } },
+    },
   },
-}: any) => {
-  const [result, setResult] = useState<any>({});
-
-  console.log('item', item);
+}) => {
+  const [result, setResult] = useState<ITimeResult>();
 
   useEffect(() => {
     const result = localStorageHelper.load(topic.toLowerCase());
     setResult(result);
-  }, []);
+  }, [topic]);
 
   return (
     <div

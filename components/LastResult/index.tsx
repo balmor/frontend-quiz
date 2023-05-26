@@ -1,6 +1,13 @@
+import { ITimeResult } from "@/types";
 import { isEmpty } from "lodash";
+import { FC } from "react";
 
-const LastResult = ({ result, result: { score = '', time = '' } = {} }: any) => {
+export interface PropsLastResult {
+  result?: ITimeResult;
+}
+
+const LastResult: FC<PropsLastResult> = ({ result, result: { score = '', finishTime = '' } = {} }) => {
+
   if (isEmpty(result)) return null;
 
   return (
@@ -48,7 +55,7 @@ const LastResult = ({ result, result: { score = '', time = '' } = {} }: any) => 
             d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span>{time}</span>
+        <span>{finishTime}</span>
       </div>
     </div>
   );

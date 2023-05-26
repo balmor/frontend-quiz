@@ -1,6 +1,15 @@
-const ProgressBar = ({ quest = [], currentQuestion = 0, history = [] }) => (
+import { IQuizQuestions } from "@/types";
+import { FC } from "react";
+
+interface PropsProgressBar {
+  quest: IQuizQuestions[];
+  currentQuestion: number;
+  history: number[];
+}
+
+const ProgressBar: FC<PropsProgressBar> = ({ quest = [], currentQuestion = 0, history = [] }) => (
   <div className="flex gap-1 m-2 mb-4">
-    {quest.map((_, index) => {
+    {quest.map((_: IQuizQuestions, index: number) => {
       const currentQuest = currentQuestion === index;
       const isError = history[index] === 0;
       const isSuccess = history[index] === 1;

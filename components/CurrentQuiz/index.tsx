@@ -1,35 +1,26 @@
-import { useState } from 'react';
-import { intervalToDuration } from 'date-fns';
-import { Transition } from '@headlessui/react'
+import { FC, MouseEvent, useState } from 'react';
+import { Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import Result from '../Result';
 import Timer from '../Timer';
 import ProgressBar from '../ProgressBar';
 import Link from 'next/link';
+import { IQuiz, IResult } from '@/types';
 
 const questionElements = 'abcd'.toUpperCase().split('');
 
-const CurrentQuiz = ({ quiz: { quest = [], topic = '' } = {} }: any) => {
-  const [timer, setTimer] = useState(0);
-  const [history, setHistory] = useState<any>([]);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState('');
-  const [result, setResult] = useState({
+const CurrentQuiz: FC<IQuiz> = ({ quiz: { quest = [], topic = '' } = {} }) => {
+  const [finishTime, setFinishTime] = useState<string>('');
+  const [history, setHistory] = useState<number[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<string>('');
+  const [result, setResult] = useState<IResult>({
     score: 0,
     correctAnswers: 0,
     wrongAnswers: 0,
     percent: 0,
   });
-  const [isFinish, setFinish] = useState(false);
-
-  const { minutes = 0, seconds = 0 } = intervalToDuration({
-    start: 0,
-    end: timer * 1000,
-  });
-  const time = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
-    2,
-    '0'
-  )}`;
+  const [isFinish, setFinish] = useState<boolean>(false);
 
   const isLastQuestion = currentQuestion + 1 === quest.length;
 
@@ -43,37 +34,37 @@ const CurrentQuiz = ({ quiz: { quest = [], topic = '' } = {} }: any) => {
     setCurrentQuestion((prev) => prev + 1);
   };
 
-  const handleChoice = (e: any) => {
+  const handleChoice = (e: MouseEvent<HTMLLIElement>) => {
     if (selectedAnswer) {
       return;
     }
-    const answer = e.currentTarget.childNodes[1].textContent;
+    const answer = e.currentTarget.childNodes[1].textContent || '';
 
     setSelectedAnswer(answer);
 
     if (answer === quest[currentQuestion].correct) {
-      setResult((prev: any) => ({
+      setResult((prev: IResult) => ({
         ...prev,
         score: prev.score + 10,
         correctAnswers: prev.correctAnswers + 1,
         percent: Math.round(((prev.correctAnswers + 1) / quest.length) * 100),
       }));
-      setHistory((prev: any) => [...prev, 1]);
+      setHistory((prev: number[]) => [...prev, 1]);
     } else {
-      setResult((prev: any) => ({
+      setResult((prev: IResult) => ({
         ...prev,
         wrongAnswers: prev.wrongAnswers + 1,
       }));
-      setHistory((prev: any) => [...prev, 0]);
+      setHistory((prev: number[]) => [...prev, 0]);
     }
   };
 
   return (
     <>
-      {!isFinish ? (
+      {!finishTime ? (
         <div className="flex flex-col min-h-[30rem] w-full sm:w-[40rem]">
           <div className="flex justify-between items-center m-2">
-            <Timer timer={timer} setTimer={setTimer} />
+            <Timer setFinishTime={setFinishTime} isFinish={isFinish} />
             <h2 className="text-xl">{topic}</h2>
             <h4 className="self-end">
               <span className="text-3xl font-bold">{currentQuestion + 1}</span>
@@ -104,8 +95,7 @@ const CurrentQuiz = ({ quiz: { quest = [], topic = '' } = {} }: any) => {
                         choice !== selectedAnswer && 'border-primary',
                         !selectedAnswer &&
                           'hover:bg-secondary-content cursor-pointer',
-                        choice === selectedAnswer &&
-                          'bg-secondary-content',
+                        choice === selectedAnswer && 'bg-secondary-content',
                         choice === selectedAnswer &&
                           selectedAnswer !== quest[currentQuestion].correct &&
                           'border-error',
@@ -150,13 +140,13 @@ const CurrentQuiz = ({ quiz: { quest = [], topic = '' } = {} }: any) => {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="2.5"
+                              strokeWidth="2.5"
                               stroke="currentColor"
                               className="w-4 h-4"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="M4.5 12.75l6 6 9-13.5"
                               />
                             </svg>
@@ -215,7 +205,7 @@ const CurrentQuiz = ({ quiz: { quest = [], topic = '' } = {} }: any) => {
           </div>
         </div>
       ) : (
-        <Result result={result} time={time} topic={topic} />
+        <Result result={result} finishTime={finishTime} topic={topic} />
       )}
     </>
   );

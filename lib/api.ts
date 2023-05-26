@@ -1,4 +1,5 @@
-import { createClient } from 'contentful';
+import { IPath, ISlug } from '@/types';
+import { createClient, EntryCollection } from 'contentful';
 
 export const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -10,15 +11,8 @@ export const getAllFrontedQuiz = async () =>
     content_type: 'frontendQuiz',
   });
 
-export const getFrontedQuiz = async (params: any) =>
+export const getFrontedQuiz = async (params: ISlug) =>
     await client.getEntries({
       content_type: 'frontendQuiz',
       'fields.slug': params.slug
     });
-
-export const getQuiz = async (params: any) =>
-  await client.getEntries({
-    content_type: 'quiz',
-    'fields.slug': params.slug
-  });
-

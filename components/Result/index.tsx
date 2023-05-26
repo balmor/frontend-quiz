@@ -1,19 +1,24 @@
-import { useLocalStorage, getStorageValue } from '@/hooks/useLocalStorage';
+import { IResult } from '@/types';
 import { localStorageHelper } from '@/utils';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 
-const Result = ({
+interface PropsResult {
+  result: IResult;
+  finishTime: string;
+  topic: string;
+}
+
+const Result: FC<PropsResult> = ({
   result: { score = 0, correctAnswers = 0, wrongAnswers = 0, percent = 0 } = {},
-  time,
+  finishTime,
   topic,
-}: any) => {
-  const finalResult = { score, correctAnswers, wrongAnswers, percent, time };
+}) => {
 
-  console.log('time', time);
   useEffect(() => {
+    const finalResult = { score, correctAnswers, wrongAnswers, percent, finishTime };
     localStorageHelper.saveItemToObject(finalResult, topic.toLowerCase());
-  }, [finalResult, topic]);
+  }, [correctAnswers, percent, score, finishTime, topic, wrongAnswers]);
 
   return (
     <div className="flex flex-col max-w-xl min-h-[40rem]">
@@ -120,7 +125,7 @@ const Result = ({
                 </svg>
               </div>
               <div className="stat-title">Time</div>
-              <div className="stat-value">{time}</div>
+              <div className="stat-value">{finishTime}</div>
             </div>
           </div>
         </div>
