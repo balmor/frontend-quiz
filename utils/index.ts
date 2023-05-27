@@ -1,16 +1,17 @@
+import { IQuiz, IQuizFields, IQuizQuestions } from '@/types';
 import { shuffle } from 'lodash';
 
 export const balmorURL = 'https://balmor.github.io/';
 
-export const formattedQuiz = (quiz: any) => {
-  const { quest = [] } = quiz;
+export const formattedQuiz = (quiz: IQuizFields): IQuizFields => {
+  const { quest } = quiz;
   quiz.quest = shuffle(shuffleAnswers(quest));
 
   return quiz;
 };
 
-export const shuffleAnswers = (quest: any) =>
-  quest.map(({ question, choices }: any) => ({
+export const shuffleAnswers = (quest: IQuizQuestions[]) =>
+  quest.map(({ question, choices }: IQuizQuestions) => ({
     question,
     choices: shuffle(choices),
     correct: choices[0],

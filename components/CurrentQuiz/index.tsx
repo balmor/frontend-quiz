@@ -87,7 +87,7 @@ const CurrentQuiz: FC<IQuiz> = ({ quiz: { quest = [], topic = '' } = {} }) => {
             <div className="card-body">
               <ul>
                 {quest[currentQuestion].choices.map(
-                  (choice: any, index: number) => (
+                  (choice: string, index: number) => (
                     <li
                       key={choice}
                       className={clsx(

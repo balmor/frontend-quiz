@@ -42,8 +42,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: IPath) {
   const quiz = await getFrontedQuiz(params);
-  const { items: [item] = [] } = quiz || {};
-  const { fields } = item || {};
+  const { items: [item] } = quiz || {};
+  const fields = item?.fields as IQuizFields;
 
   return {
     props: { quiz: formattedQuiz(fields) },

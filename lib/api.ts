@@ -1,4 +1,4 @@
-import { IPath, ISlug } from '@/types';
+import { ISlug } from '@/types';
 import { createClient, EntryCollection } from 'contentful';
 
 export const client = createClient({
