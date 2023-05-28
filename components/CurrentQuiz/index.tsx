@@ -1,15 +1,20 @@
-import { FC, MouseEvent, useState } from 'react';
+import { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import Result from '../Result';
 import Timer from '../Timer';
 import ProgressBar from '../ProgressBar';
 import Link from 'next/link';
-import { IQuiz, IResult } from '@/types';
+import { IQuizFields, IResult } from '@/types';
 
 const questionElements = 'abcd'.toUpperCase().split('');
 
-const CurrentQuiz: FC<IQuiz> = ({ quiz: { quest = [], topic = '' } = {} }) => {
+interface PropsCurrentQuiz {
+  quiz: IQuizFields;
+  setProgress: Dispatch<SetStateAction<boolean>>;
+}
+
+const CurrentQuiz: FC<PropsCurrentQuiz> = ({ quiz: { quest = [], topic = '' } = {}, setProgress }) => {
   const [finishTime, setFinishTime] = useState<string>('');
   const [history, setHistory] = useState<number[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -205,7 +210,7 @@ const CurrentQuiz: FC<IQuiz> = ({ quiz: { quest = [], topic = '' } = {} }) => {
           </div>
         </div>
       ) : (
-        <Result result={result} finishTime={finishTime} topic={topic} />
+        <Result result={result} finishTime={finishTime} topic={topic} setProgress={setProgress} />
       )}
     </>
   );

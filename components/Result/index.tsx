@@ -1,18 +1,20 @@
 import { IResult } from '@/types';
 import { localStorageHelper } from '@/utils';
 import Link from 'next/link';
-import { FC, useEffect } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 
 interface PropsResult {
   result: IResult;
   finishTime: string;
   topic: string;
+  setProgress: Dispatch<SetStateAction<boolean>>;
 }
 
 const Result: FC<PropsResult> = ({
   result: { score = 0, correctAnswers = 0, wrongAnswers = 0, percent = 0 } = {},
   finishTime,
   topic,
+  setProgress,
 }) => {
 
   useEffect(() => {
@@ -149,7 +151,7 @@ const Result: FC<PropsResult> = ({
 
           <span>Take New Quiz</span>
         </Link>
-        <Link href="/quiz/react" className="btn">
+        <button onClick={() => setProgress(false)} className="btn">
           <span>Try Again</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +167,7 @@ const Result: FC<PropsResult> = ({
               d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
             />
           </svg>
-        </Link>
+        </button>
       </div>
     </div>
   );

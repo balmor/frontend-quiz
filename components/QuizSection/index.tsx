@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import CurrentQuiz from '../CurrentQuiz';
 
 const QuizSection: FC<IQuiz> = ({ quiz, quiz: { topic = '' } }) => {
-  const [isProgress, setProgress] = useState(false);
+  const [isProgress, setProgress] = useState<boolean>(false);
 
   const handleStart = () => {
     setProgress(true);
@@ -12,7 +12,7 @@ const QuizSection: FC<IQuiz> = ({ quiz, quiz: { topic = '' } }) => {
   return (
     <div className="flex flex-col items-center">
       {isProgress ? (
-        <CurrentQuiz quiz={quiz} />
+        <CurrentQuiz quiz={quiz} setProgress={setProgress} />
       ) : (
         <>
           <h2 className="text-center text-[2rem] font-bold py-2">{topic}</h2>
