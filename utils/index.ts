@@ -3,6 +3,8 @@ import { shuffle } from 'lodash';
 
 export const balmorURL = 'https://balmor.github.io/';
 
+export const questionElements = 'abcdefg'.toUpperCase().split('');
+
 export const formattedQuiz = (quiz: IQuizFields): IQuizFields => {
   const { quest } = quiz;
   quiz.quest = shuffle(shuffleAnswers(quest));

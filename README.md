@@ -27,6 +27,7 @@ yarn build
 [<img src="public/preview.png" width="500"/>](/public/preview.png)
 
 ## TODO
+- [ ] migrate to latest nextjs
 - [ ] add css animation for questions
 - [ ] add responsive mode (mobile)
 - [ ] accessibility

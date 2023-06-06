@@ -5,6 +5,7 @@ import Content from '@/components/Content';
 import { getAllFrontedQuiz } from '@/lib/api';
 import FrontendQuiz from '@/components/FrontendQuiz';
 import { PropsHome } from '@/types';
+import { Suspense } from 'react';
 
 export default function Home({ items = [] }: PropsHome) {
   return (

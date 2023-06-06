@@ -27,12 +27,15 @@ export default function Quiz({ quiz }: IQuiz) {
 }
 
 export async function getStaticPaths() {
-  const frontendQuiz  = await getAllFrontedQuiz();
-  const items: Entry<IQuizFields>[] = frontendQuiz?.items as Entry<IQuizFields>[];
+  const frontendQuiz = await getAllFrontedQuiz();
+  const items: Entry<IQuizFields>[] =
+    frontendQuiz?.items as Entry<IQuizFields>[];
 
-  const paths: IPath[] = items.map((item: Entry<IQuizFields>): IPath => ({
-    params: { slug: item.fields.slug },
-  }));
+  const paths: IPath[] = items.map(
+    (item: Entry<IQuizFields>): IPath => ({
+      params: { slug: item.fields.slug },
+    })
+  );
 
   return {
     paths,
@@ -42,7 +45,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: IPath) {
   const quiz = await getFrontedQuiz(params);
-  const { items: [item] } = quiz || {};
+  const {
+    items: [item],
+  } = quiz || {};
   const fields = item?.fields as IQuizFields;
 
   return {
