@@ -1,3 +1,5 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,12 +9,46 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      fontFamily: {
+        sans: ['var(--font-roboto)', 'var(--font-baloo)',...fontFamily.sans],
+        baloo: 'var(--font-baloo)',
+      },
+      colors: {
+        third: 'var(--bg-logo-color)',
       },
     },
   },
-  plugins: [],
-}
+  plugins: [require('daisyui')],
+  daisyui: {
+    styled: true,
+    themes: [
+      {
+        quiz: {
+          primary: '#38bdf8',
+          secondary: '#1a1c34',
+          'secondary-focus': '#20233f',
+          'secondary-content': '#0d1027',
+          accent: '#fcda01',
+          'accent-focus': '#5e5700',
+          neutral: '#151a3b',
+          'neutral-focus': 'hsl(232.11, 47.5%, 12.549%)',
+          'neutral-content': '#aaaaaa',
+          'base-100': '#3d3d3e',
+          info: '#6cabd5',
+          success: 'rgb(21, 128, 61)',
+          'success-content': 'rgb(20, 83, 45)',
+          warning: '#f0d456',
+          error: 'rgb(185, 28, 28)',
+          'error-content': 'rgb(127, 29, 29)',
+        }
+      },
+      'night',
+    ],
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: '',
+    darkTheme: 'dark',
+  },
+};
