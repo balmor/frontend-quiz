@@ -21,7 +21,7 @@ yarn build
 ```
 
 ## Link
-[FrontendQUIZ](https://balmor.github.io/frontendQuiz/)
+[FrontendQUIZ](https://frontquiz.vercel.app/)
 
 ## Preview
 [<img src="public/preview.png" width="500"/>](/public/preview.png)
