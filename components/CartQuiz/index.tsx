@@ -55,17 +55,20 @@ const CartQuiz: FC<PropsCartQuiz> = ({
             />
           </div>
         </div>
-        <h2 className="card-title tooltip" data-tip={subtitle}>
-          {topic}
-          {newQuiz && <div className="badge badge-accent">NEW</div>}
-        </h2>
+        <div className="tooltip" data-tip={subtitle}>
+          <h2 className="card-title">
+            {topic}
+            {newQuiz && <div className="badge badge-accent">NEW</div>}
+          </h2>
+        </div>
+
         <div className="h-7">
           <LastResult result={result} />
         </div>
         <div className="card-actions">
           <Link
             href={{
-              pathname: `/quiz/${slug}`
+              pathname: `/quiz/${slug}`,
             }}
             className="btn btn-primary"
           >
