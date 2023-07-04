@@ -3,6 +3,7 @@
 import { IQuiz } from '@/types';
 import { FC, useState } from 'react';
 import CurrentQuiz from '../CurrentQuiz';
+import { formattedQuiz } from '@/utils';
 
 const QuizSection: FC<IQuiz> = ({ quiz, quiz: { topic = '' } }) => {
   const [isProgress, setProgress] = useState<boolean>(false);
@@ -14,7 +15,7 @@ const QuizSection: FC<IQuiz> = ({ quiz, quiz: { topic = '' } }) => {
   return (
     <div className="flex flex-col items-center">
       {isProgress ? (
-        <CurrentQuiz quiz={quiz} setProgress={setProgress} />
+        <CurrentQuiz quiz={formattedQuiz(quiz)} setProgress={setProgress} />
       ) : (
         <>
           <h2 className="text-center text-[2rem] font-bold py-2">{topic}</h2>

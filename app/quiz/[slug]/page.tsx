@@ -14,8 +14,7 @@ const getQuiz = async (slug: string) => {
     items: [item],
   } = result;
 
-  const fields = item?.fields as IQuizFields;
-  return formattedQuiz(fields);
+  return item?.fields as IQuizFields;
 };
 
 export async function generateMetadata({
