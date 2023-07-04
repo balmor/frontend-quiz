@@ -6,6 +6,7 @@ import { Entry } from 'contentful';
 import { Metadata } from 'next';
 
 export const dynamicParams = false;
+export const revalidate = 60 // revalidate this page every 60 seconds
 
 const getQuiz = async (slug: string) => {
   const result = await getFrontedQuiz(slug);
