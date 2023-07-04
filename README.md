@@ -1,4 +1,5 @@
 # </?> FrontendQUIZ
+![Vercel](https://vercelbadge.vercel.app/api/balmor/frontend-quiz)
 
 ## Getting Started
 
