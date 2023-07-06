@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
-import { intervalToDuration } from 'date-fns'
+import { intervalToDuration } from 'date-fns';
 
 interface PropsTimer {
   setFinishTime: Dispatch<SetStateAction<string>>;
@@ -21,19 +21,18 @@ const Timer: FC<PropsTimer> = ({ setFinishTime, isFinish = false }) => {
 
     return () => {
       clearInterval(interval);
-    }
+    };
   }, []);
 
   useEffect(() => {
-    const time: string = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
-      2,
-      '0'
-    )}`;
+    const time: string = `${String(minutes).padStart(2, '0')}:${String(
+      seconds
+    ).padStart(2, '0')}`;
+
     if (isFinish) {
       setFinishTime(time);
     }
-  }, [isFinish]);
-
+  }, [setFinishTime, isFinish, minutes, seconds]);
 
   return (
     <div className="flex self-end text-md text-gray-500 border p-1 rounded border-gray-600">

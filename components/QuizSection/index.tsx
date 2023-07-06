@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { IQuiz } from '@/types';
 import { FC, useState } from 'react';

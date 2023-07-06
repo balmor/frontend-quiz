@@ -13,10 +13,10 @@ export const formattedQuiz = (quiz: IQuizFields): IQuizFields => {
 };
 
 export const shuffleAnswers = (quest: IQuizQuestions[]) =>
-  quest.map(({ question, choices }: IQuizQuestions) => ({
+  quest.map(({ question, choices, correct }: IQuizQuestions) => ({
     question,
     choices: shuffle(choices),
-    correct: choices[0],
+    correct: correct || choices[0],
   }));
 
 const localStorageSupported =
