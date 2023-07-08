@@ -25,7 +25,13 @@ export const metadata: Metadata = {
   },
   description: 'Check your frontend developer knowlegde',
   keywords: ['frontend', 'quiz,', 'next.js', 'react', 'javascript'],
-  authors: [{ name: "Damian Duda", url: balmorURL }]
+  authors: [{ name: "Damian Duda", url: balmorURL }],
+  openGraph: {
+    type: 'website',
+    url: 'https://frontquiz.vercel.app',
+    title: 'Frontend QUIZ',
+    description: 'Check your frontend developer knowlegde about',
+  },
 };
 
 export default function RootLayout({ children }: { children: JSX.Element }) {

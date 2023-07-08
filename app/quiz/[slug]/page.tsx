@@ -1,12 +1,11 @@
 import QuizSection from '@/components/QuizSection';
 import { getAllFrontedQuiz, getFrontedQuiz } from '@/pages/api';
 import { IPath, IQuizFields, ISlug } from '@/types';
-import { formattedQuiz } from '@/utils';
 import { Entry } from 'contentful';
 import { Metadata } from 'next';
 
 export const dynamicParams = false;
-export const revalidate = 60 // revalidate this page every 60 seconds
+export const revalidate = 60;
 
 const getQuiz = async (slug: string) => {
   const result = await getFrontedQuiz(slug);
@@ -21,10 +20,21 @@ const getQuiz = async (slug: string) => {
 export async function generateMetadata({
   params: { slug },
 }: IPath): Promise<Metadata> {
-  const { topic } = await getQuiz(slug);
+  const { image } = await getQuiz(slug);
+  const imageUrl = image.fields.file.url;
+
+  const title = slug?.toUpperCase();
 
   return {
-    title: topic,
+    title,
+    description: `Check your frontend developer knowlegde about ${title}`,
+    openGraph: {
+      type: 'website',
+      url: `https://frontquiz.vercel.app/quiz/${slug}`,
+      title: `Frontend QUIZ - ${title}`,
+      description: `Check your frontend developer knowlegde about ${title}`,
+      images: [{ url: `https:${imageUrl}` }],
+    },
   };
 }
 
