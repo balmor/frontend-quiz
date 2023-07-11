@@ -12,7 +12,17 @@ export const getAllFrontedQuiz = async () =>
   });
 
 export const getFrontedQuiz = async (slug: string) =>
-    await client.getEntries({
-      content_type: 'frontendQuiz',
-      'fields.slug': slug
-    });
+  await client.getEntries({
+    content_type: 'frontendQuiz',
+    'fields.slug': slug,
+  });
+
+export const getQuiz = async (slug: string) => {
+  const result = await getFrontedQuiz(slug);
+
+  const {
+    items: [item],
+  } = result;
+
+  return item?.fields as IQuizFields;
+};
