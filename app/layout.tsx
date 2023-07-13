@@ -18,19 +18,21 @@ const baloo = Baloo_2({
   variable: '--font-baloo',
 });
 
+const description = 'Check your frontend developer knowledge';
+
 export const metadata: Metadata = {
   title: {
     template: 'Frontend QUIZ - %s',
     default: 'Frontend QUIZ',
   },
-  description: 'Check your frontend developer knowlegde',
-  keywords: ['frontend', 'quiz,', 'next.js', 'react', 'javascript'],
+  description,
+  keywords: ['frontend', 'quiz,', 'next.js', 'react', 'javascript', 'css', 'html'],
   authors: [{ name: "Damian Duda", url: balmorURL }],
   openGraph: {
     type: 'website',
     url: 'https://frontquiz.vercel.app',
     title: 'Frontend QUIZ',
-    description: 'Check your frontend developer knowlegde about',
+    description,
   },
 };
 

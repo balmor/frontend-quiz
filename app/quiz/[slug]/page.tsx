@@ -11,15 +11,16 @@ export async function generateMetadata({
   params: { slug },
 }: IPath): Promise<Metadata> {
   const title = slug?.toUpperCase();
+  const description =  `Check your frontend developer knowledge about ${title}`;
 
   return {
     title,
-    description: `Check your frontend developer knowlegde about ${title}`,
+    description,
     openGraph: {
       type: 'website',
       url: `https://frontquiz.vercel.app/quiz/${slug}`,
       title: `Frontend QUIZ - ${title}`,
-      description: `Check your frontend developer knowlegde about ${title}`,
+      description,
     },
   };
 }
