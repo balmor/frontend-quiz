@@ -27,6 +27,10 @@ yarn build
 ## Preview
 [<img src="public/preview.png" width="500"/>](/public/preview.png)
 
+## Tools
+- Contentful: https://app.contentful.com/
+- XLSX to JSON: https://xlsx-to-json-quiz.stackblitz.io
+
 ## TODO
 - [x] migrate to latest nextjs
 - [x] add favicon
