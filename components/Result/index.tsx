@@ -8,6 +8,8 @@ interface PropsResult {
   result: IResult;
   finishTime: string;
   topic: string;
+  subtitle: string;
+  slug: string;
   setProgress: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -15,17 +17,30 @@ const Result: FC<PropsResult> = ({
   result: { score = 0, correctAnswers = 0, wrongAnswers = 0, percent = 0 } = {},
   finishTime,
   topic,
+  subtitle,
+  slug,
   setProgress,
 }) => {
-
   useEffect(() => {
-    const finalResult = { score, correctAnswers, wrongAnswers, percent, finishTime };
-    localStorageHelper.saveItemToObject(finalResult, topic.toLowerCase());
-  }, [correctAnswers, percent, score, finishTime, topic, wrongAnswers]);
+    const finalResult = {
+      score,
+      correctAnswers,
+      wrongAnswers,
+      percent,
+      finishTime,
+    };
+    localStorageHelper.saveItemToObject(finalResult, slug.toLowerCase());
+  }, [correctAnswers, percent, score, finishTime, slug, wrongAnswers]);
 
   return (
-    <div className="flex flex-col max-w-xl min-h-[40rem]">
-      <h2 className="text-center text-[2rem] font-bold py-2">{topic}</h2>
+    <div className="flex flex-col justify-center max-w-xl min-h-[40rem]">
+      <h2 className="flex flex-col items-center text-[2rem] font-bold py-2">
+        {topic}
+        {subtitle && (
+        <div className="badge badge-base100 text-center">{subtitle}</div>
+      )}
+      </h2>
+
       <div className="flex flex-col items-center">
         <div className="inline-block rounded-full insetShadow mt-5">
           <div

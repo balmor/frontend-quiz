@@ -9,7 +9,7 @@ export interface PropsLastResult {
 
 const LastResult: FC<PropsLastResult> = ({
   result,
-  result: { score = '', finishTime = '' } = {},
+  result: { correctAnswers = 0, wrongAnswers = 0, finishTime = '' } = {},
 }) => {
   if (isEmpty(result)) return null;
 
@@ -20,7 +20,7 @@ const LastResult: FC<PropsLastResult> = ({
         data-tip="score"
       >
         <Score />
-        <span>{score}</span>
+        <span>{correctAnswers} / {correctAnswers + wrongAnswers}</span>
       </div>
       <div
         className="text-gray-500 px-2 flex items-center gap-1 tooltip"

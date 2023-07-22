@@ -12,7 +12,7 @@ interface PropsCurrentQuiz {
 }
 
 const CurrentQuiz: FC<PropsCurrentQuiz> = ({
-  quiz: { quest = [], topic = '' } = {},
+  quiz: { quest = [], topic = '', subtitle = '', slug = '' } = {},
   setProgress,
 }) => {
   const [finishTime, setFinishTime] = useState<string>('');
@@ -108,6 +108,8 @@ const CurrentQuiz: FC<PropsCurrentQuiz> = ({
           result={result}
           finishTime={finishTime}
           topic={topic}
+          subtitle={subtitle}
+          slug={slug}
           setProgress={setProgress}
         />
       )}
